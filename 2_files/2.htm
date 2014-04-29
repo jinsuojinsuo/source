@@ -14,28 +14,29 @@
         <link rel="apple-touch-icon" sizes="114x114" href="http://huaban.com/img/apple-touch-icon-iphone4.png">
         <meta name="keywords" content="benbent">
         <meta name="description" content="">
-         <link rel="stylesheet" href="2.css">
+        <link rel="stylesheet" href="http://huaban.com/css/main.css?1397720414.css">
+         <link rel="stylesheet" href="2.css.css">
         <link rel="stylesheet" href="http://huaban.com/css/pin_view.css?1395367196.css">
         <style type="text/css">
-           .diamond{ 
--ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865475, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865475, SizingMethod='auto expand')"; 
-filter: progid:DXImageTransform.Microsoft.Matrix( 
-M11=0.7071067811865475, 
-M12=-0.7071067811865477, 
-M21=0.7071067811865477, 
-M22=0.7071067811865475, 
-SizingMethod='auto expand' 
-); 
--moz-transform: rotate(45deg); 
--o-transform: rotate(45deg); 
--webkit-transform: rotate(45deg); 
--ms-transform: rotate(45deg); 
-transform:rotate(45deg); 
-} 
-:root .diamond{filter:none\9;} 
-/* Tips 组件 */ 
-.tips{position:absolute;background: #fff8e8;border:1px solid #ffba00;padding:10px;} 
-.tips-angle{position:absolute;display:block;width:8px;height:8px;font-size:0;background:#fff8ef;border-left:1px solid #ffba00;border-top:1px solid #ffba00;top:-5px;top:-6px\9;left:10px;} 
+            .nav-tip {
+                position:absolute;
+                left:50px;
+                top:5px;
+                background:#000;
+                color:#fff;
+                width:90px;
+                height:40px;
+                line-height:40px;
+                text-align:center;
+                display:none;
+            }
+            #header_side_menu .menu {
+                height:auto;
+                line-height:normal;
+                top:-101px;
+
+            }
+            .nav-tip,#header_side_menu,menu{z-index:-1}
         </style>
         <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
         <script type="text/javascript">
@@ -72,21 +73,17 @@ transform:rotate(45deg);
 //                    $(this).next('.nav-tip').hide();
 //                    $(this).next('.nav-tip').css({'left': '25px'});
 
-                   /* $(this).next('.nav-tip').animate({left: '45px', opacity: 'hide'}, 'fast', function() {
+                    $(this).next('.nav-tip').animate({left: '45px', opacity: 'hide'}, 'fast', function() {
                         $(this).next('.nav-tip').css({'left': '45px'});
                         $(this).next('.nav-tip').hide();
 //                        _this.data('flag', '2');
-                    });*/
+                    });
 //                    $(this).next('.nav-tip').fadeOut('slow');
                 });
             })
         </script>
     </head>
     <body>
-    <div class="box sanjiao_border">
-    <!--ie6下需用，非ie6无需-->
-    <i class="before"></i><i class="after"></i>
-</div>
         <div id="page" class="menu-bar-at-side profile" style="display: block;">
             <div id="header_side_menu">
                 <div class="nav pinned">
