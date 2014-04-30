@@ -37,21 +37,21 @@ var data = [{
     children: [{}]
 }];
 function newTreeview(){
-				var htmlstr='';
-				for( var i = 0; i < data.length; i++){
-					var name=data[i].name;
-					var childrenname=data[i].children[0].name;
-					console.log(childrenname);
-					htmlstr+='<li class="collapsable" style="background:none; ">';
-					htmlstr+='<span class="folder"><a class="title">'+name+'</a></span>';
-					htmlstr+='<ul><li class="collapsable">';
-					htmlstr+='<div class="hitarea collapsable-hitarea"></div>';
-					htmlstr+='<span class="folder"><a>'+childrenname+'</a></span>'
-					htmlstr+='</li></ul>';
-					htmlstr+='</li>'
-				}
-				$("#browser").html(htmlstr);
-			}
+	var htmlstr='';
+	for( var i = 0; i < data.length; i++){
+		var name=data[i].name;
+		var childrenname=data[i].children[0].name;
+		console.log(childrenname);
+		htmlstr+='<li class="collapsable" style="background:none; ">';
+		htmlstr+='<span class="folder"><a class="title">'+name+'</a></span>';
+		htmlstr+='<ul><li class="collapsable">';
+		htmlstr+='<div class="hitarea collapsable-hitarea"></div>';
+		htmlstr+='<span class="folder"><a>'+childrenname+'</a></span>'
+		htmlstr+='</li></ul>';
+		htmlstr+='</li>'
+	}
+	$("#browser").html(htmlstr);
+}
 $(function() {
     newTreeview();
     $("#browser").treeview({
