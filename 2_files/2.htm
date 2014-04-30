@@ -43,13 +43,9 @@
             $(function() {
                 $('.nav-link').hover(function(e) {
                     var e_cl = $(e.target).attr('class');
-//                    var flag = $(this).data('flag');
-//                    var _this = $(this);
                     if (e_cl == 'nav-tip') {
                         return false;
                     }
-//                    $(this).data('flag', '1');
-
                     var title = $(this).attr('data-title');
                     if (title != undefined) {
                         $(this).next('.nav-tip').html(title);
@@ -58,9 +54,7 @@
                     $(this).next('.nav-tip').animate({left: '60px', opacity: 'show'}, 'fast', function() {
                         $(this).next('.nav-tip').css({'left': '60px'});
                         $(this).next('.nav-tip').show();
-//                        _this.data('flag', '2');
                     });
-//                    $(this).next('.nav-tip').fadeIn('slow');
 
                 }, function(e) {
                     var e_cl = $(e.target).attr('class');
