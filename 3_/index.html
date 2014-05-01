@@ -1,228 +1,166 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>首页</title>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <head>
+        <title>首页</title>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-<link rel="stylesheet" type="text/css" href="css/global.css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" type="text/css" href="css/chosen.css">
-<link rel="stylesheet" type="text/css" href="css/treeview.css">
-<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css">
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="js/treeview.js"></script>
-<script type="text/javascript">
-var data = [{
-    name: " 浙江高速公路运行服务有限高速",
-    url: "",
-    children: [{
-        name: "权限管理",
-        url: "",
-        children: [{
-            name: " 用户管理",
-            url: "authox/user.jsp?active=11",
-            children: []
-        }]
-    },
-    {
-        name: "权限管理2",
-        url: "",
-        children: []
-    }]
-},
-{
-    name: " 浙江高速公路运行服务有限高速22",
-    url: "",
-    children: [{}]
-}];
-function newTreeview(data){
-	var htmlstr='';
-	for( var i in data ){
-		if(!data[i].name){
-			continue;
-		}
-		htmlstr+='<li class="collapsable" style="background:none; ">';
-		htmlstr+='<span class="folder"><a class="title">'+data[i].name+'</a></span>';
-		if(getType(data[i].children) == 'array'&& data[i].children.length>0){
-			var data2 = data[i].children;
-			newTreeview(data2);
-			/*
-			for(var k in data2){
-				if(!(data2[k].name)){
-					continue;
-				}else{}
-				htmlstr+='<ul><li class="collapsable">';
+        <link rel="stylesheet" type="text/css" href="css/global.css"/>
+        <link rel="stylesheet" type="text/css" href="css/index.css"/>
+        <link rel="stylesheet" type="text/css" href="css/chosen.css"/>
+        <link rel="stylesheet" type="text/css" href="css/treeview.css"/>
+        <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css"/>
+        <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="js/treeview.js"></script>
+        <script type="text/javascript">
+            /**
+             *这个数组递归很简单，难度在于在页面显示时每一级都用了不同的样试，
+             *所以无法用递归实现，其实应该也可以只是比较复杂吧，总结原因还是html结构不合理
+             *最初写法为什么实现不了
+             *原因:最初写法只用了顶级的样试 所以怎和以遍历显示都是乱的
+             **/
+            var data = [{ 
+                    name: " 浙江高速公路运行服务有",
+                    url: "",
+                    children: [{
+                            name: "权限管理",
+                            url: "",
+                            children: [{
+                                    name: " 用户管理",
+                                    url: "authox/user.jsp?active=11",
+                                    children: []
+                                }]
+                        },
+                        {
+                            name: "权限管理2",
+                            url: "",
+                            children: []
+                        }]
+                },
+                {
+                    name: " 浙江高速公路运行服务22",
+                    url: "",
+                    children: [{}]
+                }];
+            function newTreeview2(data){
+                var htmlstr='';
+                for( var i1 in data ){
+                    if(!data[i1].name){
+                        continue;
+                    }
+                    
+                    htmlstr+='<li class="collapsable" style="background:none;">';
+                    htmlstr+='<span class="folder"><a class="title">'+data[i1].name+'</a></span>';
+                    
+                    
+                    //{二维开始
+                    var data2 = data[i1].children;
+                    htmlstr+='<ul class="" style="margin:0">';
+                    for(var i2 in data2){
+                        if(!data2[i2].name){
+                            continue;
+                        }
+                        htmlstr+= '<li class="collapsable">';
+                        htmlstr+= '<div class="hitarea collapsable-hitarea"></div><span class="folder"><a>'+data2[i2].name+'</a></span>';
+                        
+                        //{三维开始
+                        var data3 = data2[i2].children;
+                        htmlstr+='<ul>';
+                        for(var i3 in data3){
+                            if(!data3[i3].name){
+                                continue;
+                            }
+                            htmlstr+='<li>';
+                            htmlstr+='<span id="user" class="file"><a onclick="leftTreeJump(this);" href="javascript:void(0);" hre="authox/user.jsp?active=11">'+data3[i3].name+'</a></span>';
+                            htmlstr+= '</li>';
+                        }
+                        htmlstr+= '</ul>';
+                        //三维结束}
+                        
+                        htmlstr+= '</li>';
+                    }
+                    htmlstr+= '</ul>';
+                    //二维结束}
+                    
+                    htmlstr+='</li>';
+                }
+                return htmlstr;
+            }
 
-				htmlstr+='<div class="hitarea collapsable-hitarea"></div>';
-				htmlstr+='<span class="folder"><a>'+data2[k].name+'</a></span>'
+            $(function() {
+                var newt2 = newTreeview2(data);
+                $("#browser").html(newt2);
 
-				htmlstr+='</li></ul>';
-			}*/
-		}else{
-			htmlstr+='<ul>';
+//                $("#browser").treeview({
+//                    persist: "location",
+//                    collapsed: true,
+//                    unique: true
+//                });
+            })
+        </script>
+    </head>
+    <body>
+        <div class="ui-top-nav">
+            <h2 class="ui-tit">基础数据管理系统</h2><a href="#" class="ui-exit"></a>
+        </div>
+        <div class="ui-container"> 
+            <!--左框架 start-->
+
+            <div class="ui-a-arr stop fn-hide"><a href="#" class=""></a></div>
+            <div class="ui-sidebar">
+                <div class="ui-sidebar-tit">基础数据索引<span class="ui-hline"></span><a href="#" class="ui-a-arr open"></a></div>
+                <ul id="browser" class="filetree treeview">
+                    <li class="collapsable" style="background:none; ">
+                        <span class="folder"><a class="title">浙江高速公路运行服务有</a></span>
+                        <ul class="" style="margin:0">
+                            <li class="collapsable">
+                                <div class="hitarea collapsable-hitarea"></div>
+                                <span class="folder"><a>权限管理</a></span>
+                                <ul>
+                                    <li>
+                                        <span class="file" id="user">
+                                            <a hre="authox/user.jsp?active=11" href="javascript:void(0);" onclick="leftTreeJump(this);">用户管理</a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="file" id="organization">
+                                            <a hre="authox/organization.jsp?active=11" href="javascript:void(0);" onclick="leftTreeJump(this);">组织管理</a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="file" id="role">
+                                            <a hre="authox/role.jsp?active=11" href="javascript:void(0);" onclick="leftTreeJump(this);">角色管理</a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="file" id="gn">
+                                            <a hre="authox/authoxObject.jsp?active=11" href="javascript:void(0);" onclick="leftTreeJump(this);">功能管理</a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="file" id="operate">
+                                            <a hre="authox/operate.jsp?active=11" href="javascript:void(0);" onclick="leftTreeJump(this);">操作管理</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
 
 
-			htmlstr+='<li class="collapsable">';
-			htmlstr+='<div class="hitarea collapsable-hitarea"></div>';
-			//htmlstr+='<span class="folder"><a>'+childrenname+'</a></span>'
-			htmlstr+='</li>';
+                    </li>
+                </ul>
 
 
-			htmlstr+='</ul>';
-		}
-		htmlstr+='</li>'
-	
-		/*
-		continue;
-		var name=data[i].name;
-		var childrenname=data[i].children[0].name;
-		console.log(childrenname);
-		htmlstr+='<li class="collapsable" style="background:none; ">';
-		htmlstr+='<span class="folder"><a class="title">'+name+'</a></span>';
-		htmlstr+='<ul><li class="collapsable">';
-		htmlstr+='<div class="hitarea collapsable-hitarea"></div>';
-		htmlstr+='<span class="folder"><a>'+childrenname+'</a></span>'
-		htmlstr+='</li></ul>';
-		htmlstr+='</li>'*/
-	}
-	return htmlstr;
-	alert(htmlstr);
-	$("#browser").html(htmlstr);
-}
 
+            </div>
 
-var htmlstr='';
-function newTreeview2(data){
-	htmlstr+='<ul>';
-	for( var i in data ){
-		if(!data[i].name){
-			continue;
-		}
-		htmlstr+='<li class="collapsable" style="background:none; ">';
-		htmlstr+='<div class="hitarea collapsable-hitarea"></div>';
-		htmlstr+='<span class="folder"><a class="title">'+data[i].name+'</a></span>';
-		if(getType(data[i].children) == 'array'&& data[i].children.length>0){
-			htmlstr+=newTreeview2(data[i].children);
-		}
-		htmlstr+='</li>';
+            <!--左框架 end--> 
 
-	}
-	htmlstr+='</ul>';
-	return htmlstr;
-}
+        </div>
 
-/**
- * 获取变量的数据类型
- * @param {type} vars
- * @returns {unresolved}
- */
-function getType(vars) {
-    var type = typeof vars;
-    if (type == 'object') {
-        var type2 = Object.prototype.toString.call(vars);
-        if (type2 == '[object Array]') {
-            type = 'array';
-        } else if (type2 == '[object Object]') {
-            type = 'object';
-        } else {
-            type = type2.replace(/[\[\]]/gi, '');
-        }
-    }
-    return type;
-}
+        <script type="text/javascript" src="js/lib.js"></script> 
+        <script type="text/javascript">
 
-$(function() {
-    var newt2 = newTreeview2(data);
-	alert(newt2);
-	$("#browser").html(newt2);
-	/*
-    $("#browser").treeview({
-        persist: "location",
-        collapsed: true,
-        unique: true
-    });	*/
-})
-</script>
-</head>
-<body>
-<div class="ui-top-nav">
-  <h2 class="ui-tit">基础数据管理系统</h2><a href="#" class="ui-exit"></a>
-</div>
-<div class="ui-container"> 
-  <!--左框架 start-->
- 
-  <div class="ui-a-arr stop fn-hide"><a href="#" class=""></a></div>
-  <div class="ui-sidebar">
-    <div class="ui-sidebar-tit">基础数据索引<span class="ui-hline"></span><a href="#" class="ui-a-arr open"></a></div>
-    <ul id="browser" class="filetree treeview">
-                <li class="collapsable" style="background:none; ">
-                    <span class="folder">
-                        <a class="title">
-                            浙江高速公路运行服务有限高速
-                        </a>
-                    </span>
-                   <ul class="">
-                        <li class="collapsable">
-                            <div class="hitarea collapsable-hitarea"></div>
-                            <span class="folder">
-                                <a>
-                                    权限管理
-                                </a>
-                            </span>
-                            <ul>
-                                <li>
-                                    <span class="file" id="user">
-                                        <a hre="authox/user.jsp?active=11" href="javascript:void(0);" onclick="leftTreeJump(this);">
-                                            用户管理
-                                        </a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="file" id="organization">
-                                        <a hre="authox/organization.jsp?active=11" href="javascript:void(0);"
-                                        onclick="leftTreeJump(this);">
-                                            组织管理
-                                        </a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="file" id="role">
-                                        <a hre="authox/role.jsp?active=11" href="javascript:void(0);" onclick="leftTreeJump(this);">
-                                            角色管理
-                                        </a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="file" id="gn">
-                                        <a hre="authox/authoxObject.jsp?active=11" href="javascript:void(0);" onclick="leftTreeJump(this);">
-                                            功能管理
-                                        </a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="file" id="operate">
-                                        <a hre="authox/operate.jsp?active=11" href="javascript:void(0);" onclick="leftTreeJump(this);">
-                                            操作管理
-                                        </a>
-                                    </span>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <br>
-                <br>
-            </ul>
-  </div>
- 
-  <!--左框架 end--> 
-
-</div>
-
-<script type="text/javascript" src="js/lib.js"></script> 
-<script type="text/javascript">
-
-</script>
-</body>
+        </script>
+    </body>
 </html>
