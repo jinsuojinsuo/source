@@ -1,0 +1,403 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.cico.ems.authox.bean.LoginBean" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<%            
+            String path = request.getContextPath();
+            String basePath = request.getScheme() + "://"
+                    + request.getServerName() + ":" + request.getServerPort()
+                    + path + "/";
+
+            Object loginBeanObj = session.getAttribute("loginBean");
+            if(loginBeanObj != null){
+	        	LoginBean loginBean = (LoginBean)loginBeanObj;
+	        	boolean hasAuthox = false;
+	        	if(loginBean.check("taskSet", "edit"))
+	        		hasAuthox = true;
+            }
+    %>
+<base href="<%=basePath%>">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>角色管理</title>
+<link href="css/jquery/jquery.alerts.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css"/>
+<link rel="stylesheet" type="text/css" href="css/authox/configure.css" />
+<link rel="stylesheet" type="text/css" href="css/authox/user.css"/>
+<link rel="stylesheet" type="text/css" href="css/treeview.css">
+<script src="js/jquery.js"></script>
+<script src="js/authox/css.js" type="text/javascript" language="javascript"></script>
+<script type="text/javascript" src="js/artDialog4.1.7/artDialog.js?skin=default"></script>
+<script type="text/javascript" src="js/artDialog4.1.7/init.js"></script>
+<script language=javascript src="js/jquery/jquery.alerts.js"></script>
+<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript" src="js/jquery-ui/jquery-ui.js"></script>
+<script type="text/javascript" src="js/treeview.js"></script>
+<script type="text/javascript" src="js/jquery.treeview.js"></script>
+<script type="text/javascript" src="js/jquery.query.js"></script>
+<script src="js/datagrid.js"></script>
+<script src="js/form.js"></script>
+<style>
+#leftTable {
+	float:left;
+	width: 550px;
+}
+#rightTable {
+	float:left;
+	width: 550px;
+	position: relative;
+}
+.btnbar{
+	height: 50px;
+}
+#operateTree{
+}
+.ui-container-r {
+	margin-left: 80px !important; 
+}
+.TablePageDiv {
+	display: none !important;
+}
+.user-tool a {
+	margin-right: 0px;
+}
+.TableDiv-style2 .currentPageNo {
+	width: 25px;
+}
+.objOp{
+	height: 30px;
+}
+.opName{
+	float: left;
+/* 	width: 100px; */
+}
+.opAll{
+	position: absolute;
+	float: left;
+	left: 150px;
+}
+.opCheckAll{
+	position: absolute;
+	float: left;
+	left: 200px;
+}
+.opCheck{
+	float: left;
+	width: 80px;
+	margin-right: 30px;
+}
+</style>
+
+
+	
+<script type="text/javascript">
+	var table_param1={
+		url:'authox/AuthoxAction_listRoleNew.action',
+		form:"#queryForm",
+		style: 2,
+		scroll : false,
+		page: true,
+		checkbox : true,
+		pageNo:1,
+		pageSize:10,
+		pk: 'role',
+		colModel:[
+			{
+				name: 'role',
+				display : '编号',
+				width : '30%'
+			},
+			{
+				name: 'name',
+				display : '角色名称',
+				width : '40%'
+			},
+			{
+				name: 'des',
+				display: '描述',
+				width: '60%'
+			}
+		]
+	};	
+	var treeData= [{
+		name: " 浙江高速公路运行服务有限高速",
+		url: "",
+		children: [{
+			name: "权限管理",
+			url: "",
+			children: [{
+				name: " 用户管理",
+				url: "authox/user.jsp?active=11",
+				children: []
+			}]
+		},
+		{
+			name: "权限管理2",
+			url: "",
+			children: []
+		}]
+	},
+	{
+		name: " 浙江高速公路运行服务有限高速22",
+		url: "",
+		children: [{}]
+	}];
+	
+	$(function(){
+		$('#fdiv').datagrid(table_param1);		
+
+		$('#search').click(function(){
+			$('#fdiv').datagridReload();
+		});
+		
+		$('body').delegate('#add','click',function(){
+			var opt={
+			         'title':'角色维护',
+			         'id':'popup_org',
+			         'lock':true,
+			         width:'426px',
+			         background:'#ccc',
+			         opacity:'0.3',
+			         padding:'0px'
+			         };
+			myAjaxPanel('authox/AuthoxAction_addRole.action',opt);
+		});
+		
+		$('body').delegate('#edit','click',function(){			
+        	var opt={
+				'title':'角色维护',
+				'id':'popup_org',
+				'lock':true,
+				 width:'426px',
+		         background:'#ccc',
+		         opacity:'0.3',
+		         padding:'0px'
+				};
+       		$('#fdiv').datagridDeal(function(id){
+       			myAjaxPanel("authox/AuthoxAction_addRole.action?authoxRole.role="+id,opt);
+       		});
+		});			
+		
+		$('body').delegate('#delete','click',function(){		
+			$('#fdiv').datagridDeal(function(id){
+				confirmbox('是否确定删除?',function(){
+					submitForm(
+						{
+							url:"authox/AuthoxAction_deleteRoleById.action?authoxRole.role="+id,
+							form:$('notExist'),
+							callBack:function(result){
+								if(result.resultBean.result == true){
+									$('#fdiv').datagridReload();
+								}
+								else{
+									myAlert(result.resultBean.message, {icon:'warning'});
+								}
+							},
+							error:function(XMLHttpRequest, textStatus, errorThrown){
+								myAlert(XMLHttpRequest.responseText,{icon:'warning'});
+							}
+						});
+				});
+			});
+		});
+		
+		$('body').delegate('#save','click',function(){
+			submitForm({
+				url: "authox/AuthoxAction_saveRoleById.action",
+				form: $('#saveForm'),
+				callBack: function(result){
+					if(result.resultBean.result == true){
+						$('#fdiv').datagridReload();
+						closeMyDialog('popup_org');
+					}
+					else{
+						myAlert(result.resultBean.message, {icon:'warning'});
+					}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					myAlert(XMLHttpRequest.responseText,{icon:'warning'});
+				}
+			});
+		}); 
+		
+		$('body').delegate('#update','click',function(){
+			submitForm({
+				url: "authox/AuthoxAction_updateRoleById.action",
+				form: $('#saveForm'),
+				callBack: function(result){
+					$('#fdiv').datagridReload();
+					closeMyDialog('popup_org');
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					myAlert(XMLHttpRequest.responseText,{icon:'warning'});
+				}
+			});
+		}); 
+		
+        
+        $('body').delegate('#qxfp','click',function(){
+        	$.ajax({
+				url : 'authox/AuthoxAction_listAuthoxObjectNew.action?pageNo=1&pageSize=0',
+				type : 'post',
+				dataType : 'json',
+				timeout : 60000,
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+				},
+				success : function(odata) {
+
+		     		var oTree = buildAuthoxTree(odata.result);
+		    		var newt2 = newTreeview(oTree);
+		            $("#operateTree").html(newt2);
+		            $("#operateTree").treeview();
+				}
+        	});
+
+        });
+	});
+	
+	function buildAuthoxTree(oData){
+		var oDataTree = [{
+				code: '',
+				name: "系统应用",
+				url: "",
+				children: []
+				}];
+		
+		var oTree = [];
+		for(var i in oData){
+			var org = oData[i];
+			addNode(org, oTree, oData);
+		}
+		
+		oDataTree[0].children = oTree;
+		return oDataTree;
+	}
+	
+	//树对象添加节点
+	function addNode(org, oTree, list){
+		var node = findNode(org.code, oTree);
+		if(node != null)
+			return node;
+		
+		var useHtml = false;
+		if(org.operateSet != null && org.operateSet.length > 0)
+			useHtml = true;
+		var html = '<div class="objOp">';
+		html += '<div class="opName">'+org.name+'</div>';
+		html += '<div class="opAll"><input type="checkbox" value="checkbox"></div>';
+		html += '<div class="opCheckAll">';
+		if(org.operateSet != null){
+			for(var i in org.operateSet){
+				var op = org.operateSet[i];
+				html += '<div class="opCheck">';
+				html += '<input type="checkbox" value="checkbox" code="'+op.code+'">';
+				html += op.name;
+				html += '</div>';
+			}
+		}
+		html += "</div>";
+		html += "</div>";
+		
+		var parent = null;
+		node = {
+				code: org.code,
+				name: org.name,
+				url: '',
+				children: [],
+				useHtml: true,
+				html: html
+				};
+		if(org.team != null && org.team != "null" && org.team != ""){
+			var parObj = findAuthoxObject(org.team, list);			
+			parent = findNode(parObj.code, oTree);
+			if(parent == null)
+				parent = addNode(parObj, oTree, list);
+			parent.children.push(node);
+		}
+		else{
+			oTree.push(node);
+		}	
+		return node;
+	}
+	
+	//树对象中找到对应节点
+	function findNode(code, oTree){
+		var result = null;
+		if(oTree != null){
+			for(var i in oTree){
+				var org = oTree[i];
+				if(org.code == code)
+					result = org;
+				else
+					result = findNode(code, org.children);
+				
+				if(result != null)
+					return result;
+			}
+		}
+		return result;
+	}
+	
+	//根据code从数组中查客体
+	function findAuthoxObject(code, list){
+		var result = null;
+		for(var i in list){
+			var o = list[i];
+			if(o.code == code)
+				result = o;
+		}
+		return result;
+	}
+</script>
+</head>
+<body>
+<jsp:include page="../common/head.jsp"></jsp:include> 
+<%-- <jsp:include page="../common/pageBottom.jsp"></jsp:include> --%>
+<div class="ui-container">
+  <div class="ui-sidebar">
+    <jsp:include page="../common/right_nav.jsp"></jsp:include> 
+<%--     <jsp:include page="leftTree.jsp"></jsp:include> --%>
+  </div>
+  <div class="ui-container-r" style="display: block;">
+    <div class="ui-search">
+      <form id="queryForm">
+        <span class="bold">搜索条件：</span>
+        <input type="checkbox"/>
+        <span>本中心</span>
+        <select name="queryBean.field" class="select-style">
+          <option value="name">角色名称</option>
+          <option value="role">角色编号</option>
+        </select>
+        <select name="queryBean.operation" class="select-style">
+          <option value="=">等于</option>
+          <option value="like">包含</option>
+        </select>
+        <input name="queryBean.value" class="select-style">
+        </input>
+        <input id="search" class="button-style" type="button" value="查询"/>
+        <span class="blue-style">+更多高级筛选项</span>
+      </form>
+    </div>
+    <div class="ui-next-cont">
+      <div id="leftTable"> 
+        <!--工具栏 start-->
+        <form id="queryForm" class="btnbar">
+          <div class="ui-tool user-tool"> <a class="ui-add-btn" id="add" >添加</a> <a id="delete" class="ui-del-btn ">删除</a> <a id="edit" class="ui-edit-btn ">修改</a> <a id="qxfp" class="ui-edit-btn">权限</a>
+            <div class="ui-page"></div>
+          </div>
+        </form>
+        <!--工具栏 end--> 
+        <!--table表格 start-->
+        <div id="fdiv"> </div>
+      </div>
+      <div id="rightTable"> 
+      	<div class="btnbar"></div>
+      	<div>
+      		<div id="operateTree" class="filetree treeview"></div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
