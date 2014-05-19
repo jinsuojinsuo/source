@@ -1,0 +1,253 @@
+@charset "utf-8";
+.logo {
+	background: url(../images/logo.png) no-repeat 0 0;
+	width: 100px;
+	height: 42px;
+	display: inline-block;
+}
+.m-15 {
+	margin-top: 15px;
+}
+.m-20 {
+	margin-top: 20px;
+}
+.m-25 {
+	margin-top: 25px;
+}
+.header {
+	height: 58px;
+	padding: 19px 30px 0 60px;
+}
+.morediv {
+	padding: 16px 0 0 0;
+}
+.login-top {
+	position: relative;
+	display: inline-block;
+}
+.login-box {
+	padding: 15px 25px 10px 25px;
+	width: 56px;
+	background: #fff;
+	border: 1px solid #b0bcca;
+	display: none;
+	position: absolute;
+	right: -20px;
+	z-index:5;
+}
+.login-box p {
+	font-size: 14px;
+	color: #7d7d7d;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.qq, .weibo, .renren, .weixin, .douban, .t, .f {
+	background: url(../images/login_btn.png) no-repeat 0 0;
+	width: 21px;
+	height: 22px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 7px;
+}
+.qq {
+	margin-right: 10px;
+}
+.weibo {
+	background-position: -32px 0;
+}
+.renren {
+	background-position: 0px -60px;
+	margin-right: 20px;
+}
+.weixin {
+	background-position: 0 -30px;
+	margin-right: 10px;
+}
+.douban {
+	background-position: -32px -30px;
+}
+.t {
+	background-position: 0 -89px;
+	margin-right: 10px;
+}
+.f {
+	background-position: -31px -89px;
+}
+.nav {
+	width: 675px;
+	margin-left: 60px;
+	float: left;
+	padding: 16px 0 0 0;
+}
+.nav ul {
+	overflow: hidden;
+}
+.nav li {
+	float: left;
+	margin-right: 30px;
+}
+.home, .guide, .exhibition, .story, .market, .sofa, .companion, .insurance, .more, .s-home, .s-guide, .s-exhibition, .s-story, .s-sofa, .s-go {
+	background: url(../images/nav.png) no-repeat 0 0;
+	display: inline-block;
+	height: 16px;
+	text-indent: -999em;
+}
+.home {
+	width: 33px;
+}
+.guide {
+	background-position: -63px 0;
+	width: 66px;
+}
+.exhibition {
+	background-position: -160px 0;
+	width: 33px;
+}
+.story {
+	background-position: -233px 0;
+	width: 66px;
+}
+.market {
+	background-position: -340px 0;
+	width: 66px;
+}
+.sofa {
+	background-position: -447px 0;
+	width: 49px;
+}
+.companion {
+	background-position: -527px 0;
+	width: 49px;
+}
+.insurance {
+	background-position: -608px 0;
+	width: 66px;
+}
+.more {
+	background-position: -705px 0;
+	width: 33px
+}
+.s-home {
+	background-position: 0 -26px;
+	width: 33px;
+}
+.s-guide {
+	background-position: -63px -26px;
+	width: 66px;
+}
+.s-exhibition {
+	background-position: -160px -26px;
+	width: 33px;
+}
+.s-story {
+	background-position: -233px -26px;
+	width: 33px;
+}
+.s-sofa {
+	background-position: -340px -26px;
+	width: 49px;
+}
+.s-go {
+	background-position: -447px -26px;
+	width: 66px;
+}
+.cur .s_home {
+	background-position: 0 -52px;
+	width: 33px;
+}
+.cur .s-guide {
+	background-position: -63px -52px;
+	width: 66px;
+}
+.cur .s-exhibition {
+	background-position: -160px -52px;
+	width: 33px;
+}
+.cur .s-story {
+	background-position: -233px -52px;
+	width: 33px;
+}
+.cur .s-sofa {
+	background-position: -340px -52px;
+	width: 49px;
+}
+.cur .s-go {
+	background-position: -447px -52px;
+	width: 66px;
+}
+.d-black-arrow, .d-blue-arrow {
+	width: 0;
+	height: 0;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #000 transparent transparent transparent;
+	position: relative;
+	top: 10px;
+	margin-left: 9px;
+}
+.d-blue-arrow {
+	border-color: #339999 transparent transparent transparent;
+	margin-left: 3px;
+	top: 9px;
+}
+.login, .register, .search-btn, .time-icon, .story-item .start, .place-icon, .a-calendar-prev, .a-calendar-next, .fn-t-icon, .pdf, .ID, .level, .i-comma, .i-book, .edit-info, .publish, .favorite, .fast-input, .clock, .praise, .refresh, .fn-icon-1 {
+	background: url(../images/a_btn.png) no-repeat 0 0;
+	display: inline-block;
+	
+}
+.login, .register, .search-btn {
+	width: 61px;
+	height: 25px;
+	text-indent: -999em;
+	margin-right: 20px;
+}
+.search-btn {
+	background-position: -64px 0;
+	width: 36px;
+	height: 29px;
+	position: absolute;
+	right: 3px;
+	top: 4px;
+	margin-right: 0;
+}
+.toolbtn {
+	padding: 12px 0 0 0;
+}
+.register {
+	background-position: 0 -26px;
+}
+.en-box {
+	display:inline-block;
+}
+.en {
+	display: inline-block;
+	color: #1FA48E;/*color: #f47264;*/
+	position:relative;
+	top:4px;
+}
+.pdf {
+	background-position:-75px -48px;
+	width:25px;
+	height:12px;
+	margin: 0px 5px 0 10px;
+	position: relative;
+	top: 2px;
+}
+.main {
+	width: 1002px;
+	margin: 20px auto;
+}
+.left-main {
+	width: 282px;
+}
+/* footer */
+.footer {
+	clear: both;
+	line-height:24px;
+	background: url(../images/x_d_line.png) repeat-x 0 top;
+	padding-top:10px;
+}
+.footer-nav a {
+	margin:0 5px;
+	color:#1FA48E;
+}

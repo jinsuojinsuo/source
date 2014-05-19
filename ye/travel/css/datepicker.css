@@ -1,0 +1,73 @@
+@charset "utf-8";
+/* CSS Document */
+
+.ui-datepicker {
+	font-size: 12px;
+	width: 231px;
+	background: #fff;
+	z-index: 5 !important;
+}
+.ui-datepicker table thead {
+	border-bottom: 1px solid #e7e7e7;
+	margin-bottom: 10px;
+}
+.ui-datepicker .ui-datepicker-header {
+	background: none;
+	border: none;
+	color: #5c5c5c;/*height: 30px;*/
+}
+.ui-datepicker .ui-datepicker-title {
+	height: 34px;
+	line-height: 34px;
+}
+.ui-datepicker td span, .ui-datepicker td a {
+	text-align: center;
+	border-radius: 26px;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	border: none;
+	background: none;
+	display: block;
+	height: 26px;
+	line-height: 26px;
+	color: #999999;
+}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+	background: #f2f2f2;
+	
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+	background: #20ab96;
+	color: #fff;
+}
+.ui-widget-header .ui-icon {
+	background-image: url(../images/jqueryui-calendar_picker_arrow.png);
+}
+.ui-icon-circle-triangle-e {
+	background-position: -16px 0;
+}
+.ui-icon-circle-triangle-w {
+	background-position: 0 0;
+}
+.ui-datepicker-next, .ui-datepicker-prev {
+	cursor: pointer;
+}
+.ui-datepicker-next-hover {
+	padding: 0;
+	margin: 0;
+}
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+	top: 10px;
+}
+.ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover {
+	top: 10px;
+}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+	border: none;
+	background: #f2f2f2;
+	/*font-weight: bold; */
+	color: #5c5c5c;
+}
+.ui-datepicker-year {
+	margin-right:5px !important;
+}
